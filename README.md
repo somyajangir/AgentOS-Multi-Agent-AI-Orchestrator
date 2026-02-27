@@ -40,6 +40,119 @@ It simulates how enterprise-grade AI systems are structured.
 -   **🎨 Neo-Brutalist UI:** A distinct, high-contrast design system using TailwindCSS.
 
 ---
+## 🏗️ How Queries Are Processed
+
+```
+USER SENDS MESSAGE
+"Check my order status"
+        ↓
+      ↓ ↓ ↓
+  
+┌─────────────────────┐
+│  1. ROUTER API      │
+│  (Hono Server)      │
+│  Receive message    │
+│  Rate limit check   │
+└──────────┬──────────┘
+           ↓
+           
+┌─────────────────────┐
+│  2. INTENT CHECK    │
+│  (Router Agent)     │
+│  Analyze: "order"   │
+│  Classify intent    │
+└──────────┬──────────┘
+           ↓
+      ┌────┴─────┐
+      ↓          ↓
+      
+ ORDER AGENT   BILLING AGENT   SUPPORT AGENT
+      ↓              ↓              ↓
+      
+┌─────────────────────┐
+│  3. SPECIALIZED     │
+│  AGENT SELECTED     │
+│  Use agent tools    │
+│  Query database     │
+└──────────┬──────────┘
+           ↓
+           
+┌─────────────────────┐
+│  4. CALL GEMINI AI  │
+│  (Google GenAI)     │
+│  Generate response  │
+│  With reasoning     │
+└──────────┬──────────┘
+           ↓
+           
+┌─────────────────────┐
+│  5. GET RESPONSE    │
+│  Thinking steps:    │
+│  ✓ Fetching order   │
+│  ✓ Checking status  │
+│  ✓ Formatting       │
+└──────────┬──────────┘
+           ↓
+           
+┌─────────────────────┐
+│  6. SAVE TO DB      │
+│  Store conversation │
+│  (PostgreSQL)       │
+└──────────┬──────────┘
+           ↓
+           
+┌─────────────────────┐
+│  7. SEND TO FRONTEND│
+│  JSON response      │
+│  reasoning + answer │
+└──────────┬──────────┘
+           ↓
+           
+┌─────────────────────┐
+│  8. SHOW USER       │
+│  React animates     │
+│  "Your order is     │
+│   in transit"       │
+└─────────────────────┘
+```
+
+---
+
+### ⚡ Quick Process Summary
+
+| Step | What Happens | Time |
+|------|--------------|------|
+| 1️⃣ | Message received at API | ~1ms |
+| 2️⃣ | Intent classification | ~200ms |
+| 3️⃣ | Route to correct agent | ~50ms |
+| 4️⃣ | Query database | ~100ms |
+| 5️⃣ | GenAI generates response | ~1-2s |
+| 6️⃣ | Save to database | ~50ms |
+| 7️⃣ | Send to frontend | ~10ms |
+| 8️⃣ | User sees answer | ~2.5s total |
+
+---
+
+### 🎯 What Each Agent Does
+
+**ORDER AGENT** 📦  
+→ Tracks packages, checks status, modifies orders
+
+**BILLING AGENT** 💳  
+→ Processes refunds, shows invoices, payment history
+
+**SUPPORT AGENT** 🤝  
+→ Answers FAQs, general questions, helps users
+
+---
+
+### 🔑 Key Points
+
+✅ **Router decides** which agent gets the message  
+✅ **Agent uses tools** to fetch real data  
+✅ **AI generates** natural human response  
+✅ **Reasoning shown** so users see how AI thinks  
+✅ **Everything saved** for conversation history
 
 ## 🛠️ Tech Stack
 
