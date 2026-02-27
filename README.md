@@ -13,14 +13,6 @@ A sophisticated Multi-Agent System built with **Hono**, **React**, and **Google 
 
 This project implements a scalable **Controller-Service architecture** where a "Parent" Router Agent analyzes user intent and routes queries to the appropriate "Child" Agent. It features a Neo-Brutalist frontend, real-time reasoning visualization, and robust error handling.
 
-## 🏗️ System Architecture
-
-User → Frontend (React) → Router Agent (Intent Classification)
-                                   ↓
-        ┌───────────────┬───────────────┬───────────────┐
-        ↓               ↓               ↓
-   Support Agent    Order Agent     Billing Agent
-
 ## 🎯 Why This Project Matters
 
 Modern AI systems require orchestration across multiple specialized agents rather than relying on a single monolithic model. 
